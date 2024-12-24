@@ -1,0 +1,194 @@
+//Какой результат выведет вызов метода foo()?
+void foo() {
+    String m = "Hello";
+    System.out.print(m);
+    bar(m);
+    System.out.print(m);
+}
+
+void bar(String m) {
+    m += " World!";
+}
+
+
+
+//Что выводит следующий код?
+public class MultiThreading {
+    private static class MyThread extends Thread {
+        public MyThread(String name) {
+            super(name);
+        }
+        @Override
+        public void run() {
+            System.out.println(Thread.currentThread().getName());
+        }
+    }
+    public static void main(String[] args) {
+        MyThread myThread = new MyThread("myThread");
+        myThread.run();
+    }
+}
+
+
+
+//Что выводит следующий код?
+public class MyThreads {
+    private static class MyDaemonThread extends Thread {
+        public MyDaemonThread() {
+            setDaemon(true);
+        }
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
+        }
+    }
+    public static void main(String[] args) throws InterruptedException {
+        Thread thread = new MyDaemonThread();
+        thread.start();
+        thread.join();
+        System.out.println(thread.isAlive());
+    }
+}
+
+
+
+@RestController
+public class MyController {
+    int count = 0;
+
+    @GetMapping("/getAdd")
+    public void getAdd() {
+        count++;
+    }
+
+    @GetMapping("/get")
+    public int get() {
+        return count;
+    }
+}
+
+
+//что выведет следующий код
+Stream.of("b", "a", "d", "c")
+        .map(val -> val + 1)
+        .peek(System.out::println)
+        .forEach(System.out::println);
+
+
+//что выведет следующий код
+Stream.of("b", "a", "d", "c")
+        .map(val -> val + 1)
+        .peek(System.out::println)
+        .sorted()
+        .forEach(System.out::println);
+
+//что выведет следующий код
+Stream.of(0, 3, 0, 0, 5)
+      .peek(x -> System.out.format("before distinct: %d%n", x))
+      .distinct()
+      .peek(x -> System.out.format("after distinct: %d%n", x))
+      .map(x -> x * x)
+      .forEach(x -> System.out.format("after map: %d%n", x));
+
+//что выведет следующий код
+IntStream.range(0, 100000)
+       .parallel()
+       .filter(x -> x % 10000 == 0)
+       .map(x -> x / 10000)
+       .forEach(System.out::println);
+
+
+
+// найти все числа в диапозоне от 0 до 1000 которые деляться без отсатка на 3 и не деляться на 5,
+// при этом сумма цифр числа должна быть меньше 10
+private static List<Integer> getForNumber() {
+    return IntStream.rangeClose(0, 1000).filter(i -> i % 3 == 0 && i % 5 != 0)
+            .mapToObj(i -> String.valueOf(i))
+            .filter(s -> {
+                int sum = s.chars().map(c -> Character.getNumericValue(c)).sum();
+                return sum < 10;
+            })
+            .map(Integer::parseInt)
+            .toList();
+}
+
+
+
+// Получить Map, где ключ это символ в строке, а значение то, сколько раз этот символ встречается
+//input1: aaabbbbccccc
+//input2: aaabbbaannnntt
+//input3: ""
+//input4: null
+public static Map<String, Long> getMapWithCountSymbol(String str) {
+    Optional.nullable(str).map(s -> s.chars().mapToObj(Character::toChars).collect(Collectors.groupingBy(String::valueOf, Collectors.counting()))).orElseGet(Collections.emptyMap());
+}
+
+
+
+//найти пересечения всех чисел в массивах
+//input: [1, 2, 3, 2, 0], [5, 1, 2, 7, 3, 2, 2]
+//output: [1,2,2,3]
+public static List<Integer> getRepeatedIntersection(int[] array1, int[] array2) {
+
+}
+
+
+
+//сгрупировать слова, в которых все буквы одинаковые
+//input: ["eat", "tea", "tan", "ate", "nat", "bat"]
+//output: [[eat, tea, ate], [bat], [tan, nat]]
+public static List<List<String>> groupWords(List<String> words) {
+
+}
+
+
+
+/*
+    person
+    id      name        pos_id
+    1       Владимир    1
+    2       Иван        3
+    3       Александр   2
+
+    positions
+    id      title
+    1       Дизайнер
+    2       Тестировщик
+    3       Разработчик
+
+    получить результат в виде таблицы
+    id      name        pos_title
+    1       Владимир    Дизайнер
+    2       Иван        Разработчик
+    3       Александр   Тестировщик
+*/
+
+select per.id, per.name, pos.title as pos_title from person as per inner join position as pos on per.pos_id = pos.id
+
+/*
+    category
+    id    name
+    1     сладкое
+    2     соленое
+    3     фрукты
+
+    product
+    id    category_id    price    name
+    1     1              50       печенье
+    2     1              75       мармелад
+    3     1              100      конфеты
+    4     1              125      шоколад
+    5     2              150      арахис
+    6     2              75       чипсы
+    7     2              150      кальмары
+    8     3              175      лимон
+    9     3              200      гранат
+
+    выбрать все продукты в которых категория такая же как и у конфет и цена меньше 100
+
+
+    select * from product where category_id = (select category_id from product where name = 'конфеты' and price < 100);
+*/

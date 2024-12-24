@@ -1,0 +1,251 @@
+// PECS
+
+public class PECS {
+    public static class A { }
+
+    public static class B extends A {  }
+
+    public static void main(String[] args) {
+        List<? extends A> aExtends = new ArrayList<>();
+        List<? super A> aSuper = new ArrayList<>();
+        //add
+        aExtends.add(new A());       //error
+        aExtends.add(new B())        //error
+        aSuper.add(new A());         //ok
+        //get
+        A a = aExtends.get(0);       //ok
+        a = aSuper.get(0);           //error
+        Object o = aSuper.get(0);    //ok
+    }
+}
+
+// ------------------------------------------------
+
+// Easy web-server
+
+
+import java.net.ServerSocket;
+import java.net.Socket;
+
+
+public class WebServer {
+
+    public static void main(String[] args) throws Exception {
+        ExecutorService exe = Executors.newFixedThreadPool(4);
+        try (ServerSocket socket = new ServerSocket(80)) {
+            while(true) {
+                Socket connection = socket.accept();
+                exe.execute(() -> handleRequest(connection));
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    private static void handleRequest(Socket connection)  {
+        System.out.println("Handling request");
+
+    }
+}
+
+
+
+// ------------------------------------------------
+
+
+
+// Safe Bank Account
+
+public class BankAccount {
+    private AtomicDouble balance;
+
+    public BankAccount() {
+        balance = 0.0;
+    }
+
+    public void deposit(double amount) {
+
+        balance += amount;
+    }
+
+    public  void withdraw(double amount) {
+        if (balance >= amount) {
+            balance -= amount;
+        } else {
+            System.out.println("Insufficient funds. Withdrawal cancelled.");
+        }
+    }
+
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount();
+
+        Thread depositThread1 = new Thread(() -> account.deposit(1000));
+        Thread depositThread2 = new Thread(() -> account.deposit(300));
+        Thread withdrawalThread1 = new Thread(() -> account.withdraw(300));
+        Thread withdrawalThread2 = new Thread(() -> account.withdraw(1000));
+
+        depositThread1.start();
+        withdrawalThread1.start();
+        depositThread2.start();
+        withdrawalThread2.start();
+    }
+}
+
+
+//------------------------------------------------
+
+
+// Prototype injection
+@Component
+@Scope("prototype")
+public class PrototypeBean {  }
+
+@Component
+@Scope("singleton")
+public class SingletonBean {
+
+    @Autowired
+    private PrototypeBean prototypeBean;
+
+
+    public PrototypeBean getPrototype()  {
+        return Context.getBean
+    }
+
+}
+
+@SpringBootTest
+@ContextConfiguration(classes = {SingletonBean.class, PrototypeBean.class})
+public class PrototypeInjectionTest {
+
+    @Autowired
+    private SingletonBean singletonBean;
+
+    @Autowired
+    private SingletonBean singletonBean2;
+
+    @Test
+    public void injectPrototypeTest(){
+
+    boolean singletonsAreEqual = singletonBean.equals(singletonBean2);
+    boolean prototypesAreEqual = singletonBean.getPrototype().equals(singletonBean2.getPrototype());
+
+    }
+}
+
+
+// ------------------------------------------------
+
+
+
+// Workers
+public class Workers {
+
+    public static class Worker {
+
+        String name;
+        String position;
+        Integer salary;
+
+        public Worker(String name, String position, Integer salary) {
+            this.name = name;
+            this.position = position;
+            this.salary = salary;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getPosition() {
+            return position;
+        }
+
+        public Integer getSalary() {
+            return salary;
+        }
+    }
+
+
+    public static void main(String[] args) {
+        List<Worker> workers = List.of(
+                new Worker("Dan", "Developer", 100),
+                new Worker("Maxim", "QA Tester", 50),
+                new Worker("Sergey", "Manager", 100),
+                new Worker("Vadim", "Developer", 130),
+                new Worker("Denis", "QA Tester", 70),
+                new Worker("Pavel", "Product Owner", 120)
+                );
+
+        // сумма которую платим всем
+        Integer sum = TODO
+
+        // сгруппировать людей по позициям
+        Map<String, List<Worker>> workersByPostion = TODO
+
+
+        // какую сумму мы платим каждому отделу
+        Map<String, Integer> salarySumByPostition = TODO
+
+        // Сколько людей занимают конкретную позицию
+        Map<String, Integer> countByPosition = TODO
+
+        // разделить сотрудников на тех кто получает больше 100 и меньше 100
+        Map<Boolean, List<Workers>> workersBySalaryCondition = TODO
+
+    }
+
+}
+// ------------------------------------------------
+
+
+// inWords
+
+    /**
+     * Example: parts = {"app", "gap", "map" "zip"}
+     *          words = {"apple", "maple", "zipline"}
+     *          return = {"app", "map", "zip"}
+     *
+     * @param parts - части слов
+     * @param words - слова
+     * @return отсортированные уникальные части слов которые содержатся в словах
+     */
+    public List<String> inWords(List<String> parts, List<String> words) {
+        return Collections.emptyList();
+    }
+
+
+
+
+// ------------------------------------------------
+
+
+// Top 3 words
+
+  /**
+    * example: text = "Java Java Java JavaScript JavaScript NodeJs HTML SQL SQL HTML"
+    *          return = {"java", "javascript", "html"}
+    * @param text - слова, разделенные пробелами
+    * @return топ 3 самых используемых слов с длиной больше 3 символа в lowerCase
+  **/
+  public List<String> top3(String text) {
+
+  }
+
+// ------------------------------------------------
+
+
+// Range extraction
+
+  /**
+    * example: range = {10, 1, 4 ,7, 6}
+    *          return = "1-4, 7-6, 10"
+    * @param range - набор чисел в случайном порядке
+    * @return строка в которой диапазоны чисел разделены -
+  **/
+    public String extractRange(int  []range) {
+
+    }
+
+
+
