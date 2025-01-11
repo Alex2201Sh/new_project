@@ -2,6 +2,7 @@ package by.aston.livecoding;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class Stream1 {
@@ -21,7 +22,6 @@ e) ничего не будет выведено
         Map<Double, List<Order>> collect = orders.stream()
                 .collect(Collectors.groupingBy(Order::amount));
         collect.forEach((source, r) -> System.out.print(source + " "));
-
     }
 }
 

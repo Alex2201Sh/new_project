@@ -2,7 +2,7 @@
 SELECT model:: json ->> 'ru'        AS Модель,
        aircrafts_data.aircraft_code AS Код_самолёта,
        fare_conditions              AS Класс_обслуживания,
-       count(fare_conditions)       AS Количество_мест
+       count(seats.seat_no)       AS Количество_мест
 FROM aircrafts_data
          JOIN seats ON aircrafts_data.aircraft_code = seats.aircraft_code
 GROUP BY fare_conditions, model, aircrafts_data.aircraft_code

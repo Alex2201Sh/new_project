@@ -14,7 +14,7 @@ public class Algo3ExpandedNumbers {
         for (int i = 0; i < length; i++) {
             char c = numInString.charAt(i);
             if ('0' != c) {
-                if ((i < length) && (stringBuilder.length() > 0)) {
+                if ((i < length) && (!stringBuilder.isEmpty())) {
                     stringBuilder.append(" + ");
                 }
                 stringBuilder.append(c).append("0".repeat(length - i - 1));
