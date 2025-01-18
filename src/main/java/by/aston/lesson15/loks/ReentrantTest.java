@@ -24,7 +24,6 @@ public class ReentrantTest {
         } finally {
             lock.unlock();
         }
-
     }
 
     public static void main(String[] args) {

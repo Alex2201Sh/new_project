@@ -30,10 +30,13 @@ public class Atomic {
                 .forEach(i -> {
                     Runnable task = () ->
                             atomicInt.updateAndGet(n -> n + 2);
+                            // read 0   update 0+2    read 2   read again ->
+                            // read 2   update 2+2    read 2   write  2+2  ALL OK
                     executor.submit(task);
                 });
 
         ConcurrentUtils.stop(executor);
+//        executor.shutdown();
 
         System.out.format("Update: Expected=2000; Is= %d\n", atomicInt.get());
     }
@@ -50,7 +53,7 @@ public class Atomic {
                     executor.submit(task);
                 });
 
-        ConcurrentUtils.stop(executor);
+//        ConcurrentUtils.stop(executor);
 
         System.out.format("Accumulate: Expected=499500; Is= %d\n", atomicInt.get());
     }

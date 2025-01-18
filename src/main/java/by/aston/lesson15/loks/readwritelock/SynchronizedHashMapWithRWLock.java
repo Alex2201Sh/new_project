@@ -1,4 +1,4 @@
-package by.aston.lesson15.loks;
+package by.aston.lesson15.loks.readwritelock;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +19,6 @@ public class SynchronizedHashMapWithRWLock {
     private final Lock writeLock = lock.writeLock();
 
     public void put(String key, String value) throws InterruptedException {
-
         try {
             writeLock.lock();
             System.out.println(Thread.currentThread().getName() + " writing");
@@ -62,55 +61,4 @@ public class SynchronizedHashMapWithRWLock {
     boolean isReadLockAvailable() {
         return readLock.tryLock();
     }
-
-    public static void main(String[] args) throws InterruptedException {
-
-        final int threadCount = 3;
-        final ExecutorService service = Executors.newFixedThreadPool(threadCount);
-        SynchronizedHashMapWithRWLock object = new SynchronizedHashMapWithRWLock();
-
-        service.execute(new Thread(new Writer(object), "Writer"));
-        service.execute(new Thread(new Reader(object), "Reader1"));
-        service.execute(new Thread(new Reader(object), "Reader2"));
-
-        service.shutdown();
-    }
-
-    private static class Reader implements Runnable {
-
-        SynchronizedHashMapWithRWLock object;
-
-        Reader(SynchronizedHashMapWithRWLock object) {
-            this.object = object;
-        }
-
-        @Override
-        public void run() {
-            for (int i = 0; i < 10; i++) {
-                object.get("key" + i);
-            }
-        }
-    }
-
-    private static class Writer implements Runnable {
-
-        SynchronizedHashMapWithRWLock object;
-
-        public Writer(SynchronizedHashMapWithRWLock object) {
-            this.object = object;
-        }
-
-        @Override
-        public void run() {
-            for (int i = 0; i < 10; i++) {
-                try {
-                    object.put("key" + i, "value" + i);
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
 }

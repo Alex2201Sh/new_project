@@ -1,8 +1,8 @@
-package by.aston.lesson15;
+package by.aston.lesson15.basic;
 
 public class ThreadTest {
     public static void main(String[] args) {
-        Thread thread = new Thread(new InnerThread());
+        Thread thread = new Thread(new InnerThread(),"some thread");
         System.out.println("* " + Thread.currentThread().getName());
         thread.start();
 //        thread.run();

@@ -1,6 +1,7 @@
 package by.aston.lesson15.streams;
 
 import java.math.BigInteger;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
 
@@ -16,6 +17,11 @@ class ManyNumbersCounter implements Runnable {
 
     @Override
     public void run() {
+//        try {
+//            TimeUnit.MILLISECONDS.sleep(100);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
         accumulator.getAndUpdate(bigInteger -> bigInteger.add(factorial(factorialArg)));
     }
 

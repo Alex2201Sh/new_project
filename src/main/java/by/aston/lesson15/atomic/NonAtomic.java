@@ -61,7 +61,9 @@ public class NonAtomic {
 
         IntStream.range(0, NUM_INCREMENTS)
                 .forEach(i -> executor.submit(() -> nonAtomicInt = nonAtomicInt + 1));
-
+                // THREAD 1   read 0   update 0+1   write 0+1
+                // THREAD 2            read 0       update 0+1     write 0+1
+                // expected 2   actual 1
         ConcurrentUtils.stop(executor);
 
         System.out.format("Increment: Expected=%d; Is=%d\n", NUM_INCREMENTS, nonAtomicInt);

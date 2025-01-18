@@ -14,25 +14,27 @@ public class ThreadOperations {
             System.out.println("This is greeting thread...  HELLO!!!");
             try {
 //                Thread.currentThread().sleep(10000L);  //большое время засыпания для того, чтобы main успел отработать
-                TimeUnit.SECONDS.sleep(10);
+                TimeUnit.MILLISECONDS.sleep(10000L);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
             System.out.println("Greeting thread ended.");
         };
-        Thread another = new Thread(greeting);
+        Thread greetingThread = new Thread(greeting);
         Thread yetAnother = new Thread() {
+            @Override
             public void run() {
                 super.run();
                 System.out.println("sdfsdf");
             }
         };
 
-//        another.setDaemon(true);
+//        greetingThread.setDaemon(true);
         first.start();
         second.start();
-        another.start();
-//        second.join();  //метод заставляет main поток ждать, пока выполнится поток second
+        greetingThread.start();
+        second.join();  //метод заставляет main поток ждать, пока выполнится поток second
+        greetingThread.join(); //
 
         System.out.println("Main: Goodbye world.....");
     }

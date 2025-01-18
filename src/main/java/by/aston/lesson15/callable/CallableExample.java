@@ -15,18 +15,27 @@ import java.util.stream.IntStream;
 public class CallableExample {
     public CallableExample() {
         // Определяем пул из трех потоков
-        ExecutorService executor = Executors.newFixedThreadPool(3);
+//        ExecutorService executor = Executors.newFixedThreadPool(3);
+        ExecutorService executor = Executors.newCachedThreadPool();
         ExecutorService executor2 = Executors.newSingleThreadExecutor();
 
         // Список ассоциированных с Callable задач Future
         List<Future<String>> futures =
-                IntStream.rangeClosed(1, 3)
+                IntStream.rangeClosed(1, 10)
                         .mapToObj(i -> executor.submit(new CallableClass(i)))
                         .toList();
 
         Future<String> future2 = executor2.submit(new CallableClass(1));
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss.mmm  ");
+        try {
+            String result = future2.get();
+            String text = simpleDateFormat.format(new Date()) + result;
+            System.out.println(text);
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+
         for (Future<String> future : futures) {
             try {
                 String result = future.get();
@@ -37,13 +46,6 @@ public class CallableExample {
             }
         }
 
-        try {
-            String result = future2.get();
-            String text = simpleDateFormat.format(new Date()) + result;
-            System.out.println(text);
-        } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException(e);
-        }
         // Останавливаем пул потоков
         executor.shutdown();
 //        executor2.shutdown();
