@@ -1,4 +1,5 @@
 package by.aston.livecoding;
+
 /*
 https://www.codewars.com/kata/5b93fecd8463745630001d05/train/java
 
@@ -34,4 +35,12 @@ public class Algo5Snail {
         (7, snail(100,20,5));
         (1, snail(5,10,3));
      */
+
+    public static void main(String[] args) {
+        System.out.println(2 == snail(3, 2, 1));
+        System.out.println(5 == snail(10, 3, 1));
+        System.out.println(8 == snail(10, 3, 2));
+        System.out.println(7 == snail(100, 20, 5));
+        System.out.println(1 == snail(5, 10, 3));
+    }
 }
