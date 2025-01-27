@@ -9,7 +9,7 @@ public final class CachedPhotoService {
     @Autowired
     private PhotoOperations photoOperations;
 
-    @Cacheable(cacheNames = RESIZED_PHOTO_CACHE_NAME) 
+    @Cacheable(cacheNames = RESIZED_PHOTO_CACHE_NAME)
     public PhotoDTO resizePhoto(String photoId, int width, int height) {
         photoValidationService.validateSize(width, height);
 

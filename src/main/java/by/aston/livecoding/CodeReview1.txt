@@ -57,7 +57,7 @@ public class MyThreads {
 
 @RestController
 public class MyController {
-    int count = 0;
+    static int count = 0;
 
     @GetMapping("/getAdd")
     public void getAdd() {
@@ -102,10 +102,10 @@ IntStream.range(0, 100000)
 
 
 
-// найти все числа в диапозоне от 0 до 1000 которые деляться без отсатка на 3 и не деляться на 5,
-// при этом сумма цифр числа должна быть меньше 10
+// найти все числа в диапазоне от 0 до 1000 которые делятся без остатка на 3
+// и не делятся на 5, при этом сумма цифр числа должна быть меньше 10
 private static List<Integer> getForNumber() {
-    return IntStream.rangeClose(0, 1000).filter(i -> i % 3 == 0 && i % 5 != 0)
+    return IntStream.rangeClosed(0, 1000).filter(i -> i % 3 == 0 && i % 5 != 0)
             .mapToObj(i -> String.valueOf(i))
             .filter(s -> {
                 int sum = s.chars().map(c -> Character.getNumericValue(c)).sum();
