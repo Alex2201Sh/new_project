@@ -123,7 +123,9 @@ private static List<Integer> getForNumber() {
 //input3: ""
 //input4: null
 public static Map<String, Long> getMapWithCountSymbol(String str) {
-    Optional.nullable(str).map(s -> s.chars().mapToObj(Character::toChars).collect(Collectors.groupingBy(String::valueOf, Collectors.counting()))).orElseGet(Collections.emptyMap());
+    Optional.nullable(str).map(s -> s.chars().mapToObj(Character::toChars)
+    .collect(Collectors.groupingBy(String::valueOf, Collectors.counting())))
+    .orElseGet(Collections.emptyMap());
 }
 
 
