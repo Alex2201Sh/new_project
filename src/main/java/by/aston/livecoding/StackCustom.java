@@ -34,12 +34,13 @@ public class StackCustom<T extends Comparable> {
     }
 
     public T getMin(){
-        return null; //TODO
+//        return null; //TODO
+        return stackMin.peek();
     }
 
 //---------------------------Решение
-    private Stack<T> stack;
-    private Stack<T> stackMin;
+    private Stack<T> stack = new Stack<>();
+    private Stack<T> stackMin = new Stack<>();
 
     public T push(T x){
         if (stackMin.isEmpty()|| stackMin.peek().compareTo(x)>=0) {

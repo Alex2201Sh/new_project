@@ -1,4 +1,5 @@
 package by.aston.livecoding;
+
 /*
 https://www.codewars.com/kata/5cb7baa989b1c50014a53333
  */
@@ -16,4 +17,56 @@ public class Algo1SatorSquare {
     T U B A
     S T A B
      */
+
+    public static Boolean isSatorSquare(char[][] tablet) {
+        for (int i = 0; i < tablet.length; i++) {
+            for (int j = 0; j < tablet[i].length; j++) {
+                char leftChar = tablet[i][j];
+                char rightChar = tablet[tablet.length - i - 1][tablet[i].length - j - 1];
+                char upChar = tablet[j][i];
+                char downChar = tablet[tablet.length - j - 1][tablet[i].length - i - 1];
+                if (!(leftChar == rightChar && leftChar == upChar && leftChar == downChar)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        char[][][] sampleTablets = {
+                new char[][]{{'T', 'E', 'N'}, {'E', 'Y', 'E'}, {'N', 'E', 'T'}},
+                new char[][]{{'E', 'V', 'E'}, {'E', 'E', 'E'}, {'E', 'E', 'E'}},
+                new char[][]{{'N', 'O', 'T'}, {'O', 'V', 'O'}, {'N', 'O', 'T'}},
+                new char[][]{{'B', 'A', 'T', 'S'}, {'A', 'B', 'U', 'T'},
+                        {'T', 'U', 'B', 'A'}, {'S', 'T', 'A', 'B'}},
+                new char[][]{{'B', 'A', 'T', 'S'}, {'Ä', 'B', 'U', 'T'},
+                        {'T', 'U', 'B', 'Ä'}, {'S', 'T', 'A', 'B'}},
+                new char[][]{{'P', 'A', 'R', 'T'}, {'A', 'G', 'A', 'R'},
+                        {'R', 'A', 'G', 'A'}, {'T', 'R', 'A', 'M'}},
+                new char[][]{{'S', 'A', 'T', 'O', 'R'},
+                        {'A', 'R', 'E', 'P', 'O'},
+                        {'T', 'E', 'N', 'E', 'T'},
+                        {'O', 'P', 'E', 'R', 'A'},
+                        {'R', 'O', 'T', 'A', 'S'}},
+                new char[][]{{'S', 'A', 'L', 'A', 'S'},
+                        {'A', 'R', 'E', 'N', 'A'},
+                        {'L', 'E', 'V', 'E', 'L'},
+                        {'A', 'R', 'E', 'N', 'A'},
+                        {'S', 'A', 'L', 'A', 'S'}},
+                new char[][]{
+                        {'9', '$', '[', '7', '*'},
+                        {'$', '$', 'v', 'g', '+'},
+                        {'[', 'v', 'X', 'v', '['},
+                        {'7', 'g', 'v', '$', '$'},
+                        {'*', '+', '[', '$', '9'}}
+        };
+
+        for (int i = 0; i < sampleTablets.length; i++) {
+            System.out.println(isSatorSquare(sampleTablets[i]) + " ---> " + (i % 3 == 0));
+        }
+
+
+    }
 }
+
