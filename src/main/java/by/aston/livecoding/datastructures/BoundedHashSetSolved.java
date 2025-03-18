@@ -1,16 +1,15 @@
-package by.aston.livecoding;
+package by.aston.livecoding.datastructures;
 
 import by.aston.livecoding.clev.model.Animal;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
-public class Kuznetsov2<T> {
+public class BoundedHashSetSolved<T> {
 
     private final List<T>[] data;
 
-    public Kuznetsov2(int capacity) {
+    public BoundedHashSetSolved(int capacity) {
         this.data = new List[capacity];
     }
 
@@ -35,7 +34,7 @@ public class Kuznetsov2<T> {
     }
 
     public static void main(String[] args) {
-        Kuznetsov2<Animal> bounded = new Kuznetsov2<>(2);
+        BoundedHashSetSolved<Animal> bounded = new BoundedHashSetSolved<>(2);
 
         Animal animal1 = new Animal(1, "a", 1, "A", "male");
         Animal animal2 = new Animal(2, "a", 1, "A", "male");
@@ -51,7 +50,7 @@ public class Kuznetsov2<T> {
 
 
 
-        Kuznetsov2<Integer> bounded2 = new Kuznetsov2<>(2);
+        BoundedHashSetSolved<Integer> bounded2 = new BoundedHashSetSolved<>(2);
 
         bounded2.add(1);
         bounded2.add(2);

@@ -1,13 +1,10 @@
-package by.aston.livecoding;
+package by.aston.livecoding.stream;
 
-import by.aston.livecoding.clev.model.Animal;
-
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Kuznetsov3<T> {
+public class StreamPassDecode<T> {
 
     public static void main(String[] args) {
         List<List<String>> lists = List.of(

@@ -1,9 +1,8 @@
-package by.aston.livecoding;
+package by.aston.livecoding.datastructures;
 
-import java.util.Map;
 import java.util.TreeMap;
 
-public class Kuznetsov {
+public class TreeMapLeftRightExample {
     public static void main(String[] args) {
         TreeMap<Integer, String> map = new TreeMap<>();
         map.put(999,"999");

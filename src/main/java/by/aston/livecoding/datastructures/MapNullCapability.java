@@ -1,10 +1,9 @@
-package by.aston.livecoding;
+package by.aston.livecoding.datastructures;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
-public class Kuznetsov4<T> {
+public class MapNullCapability<T> {
 
     public static void main(String[] args) {
         Map<String, String> map = new HashMap<>();
