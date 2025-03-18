@@ -1,4 +1,4 @@
-package by.aston.livecoding;
+package by.aston.livecoding.algo;
 
 /*
    12 --> "10 + 2"

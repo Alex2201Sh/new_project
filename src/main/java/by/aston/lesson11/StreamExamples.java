@@ -122,7 +122,7 @@ public class StreamExamples {
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
+                        throw new IllegalArgumentException(e);
                     }
                     return result;
                 })

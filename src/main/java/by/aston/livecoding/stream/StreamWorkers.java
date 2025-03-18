@@ -1,7 +1,6 @@
-package by.aston.livecoding;
+package by.aston.livecoding.stream;
 
 import java.util.List;
-import java.util.Map;
 
 public class StreamWorkers {
     public static class Worker {

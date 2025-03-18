@@ -1,4 +1,4 @@
-package by.aston.livecoding;
+package by.aston.livecoding.algo;
 
 /*
 https://www.codewars.com/kata/5cb7baa989b1c50014a53333

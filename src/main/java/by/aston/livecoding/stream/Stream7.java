@@ -1,4 +1,4 @@
-package by.aston.livecoding;
+package by.aston.livecoding.stream;
 
 import java.util.Comparator;
 import java.util.List;
@@ -6,8 +6,7 @@ import java.util.List;
 public class Stream7 {
     public static void main(String[] args) {
 
-        //выполнить сортировку по фамилии в обратном порядке, затем по имени,
-        //взять тех, кто старше 30 лет
+        //выполнить сортировку по фамилии в обратном порядке, затем по имени в обратном порядке
         Comparator<PersonRecord> personRecordComparator = (o1, o2) -> o2.fullName().split(" ")[1]
                 .compareTo(o1.fullName().split(" ")[1]);
         getPersonList().stream()

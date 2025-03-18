@@ -1,4 +1,4 @@
-package by.aston.livecoding;
+package by.aston.livecoding.algo;
 
 public class Algo6StringCompression {
     //дано: строка "aaaabbbcccccooooooddddddddddddddz"

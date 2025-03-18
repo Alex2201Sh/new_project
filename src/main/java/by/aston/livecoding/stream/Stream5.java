@@ -1,4 +1,4 @@
-package by.aston.livecoding;
+package by.aston.livecoding.stream;
 
 import java.util.HashMap;
 import java.util.Map;

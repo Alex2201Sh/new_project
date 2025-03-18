@@ -1,4 +1,4 @@
-package by.aston.livecoding;
+package by.aston.livecoding.datastructures;
 
 import java.util.Stack;
 
