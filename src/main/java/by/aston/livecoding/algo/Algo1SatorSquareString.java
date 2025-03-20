@@ -42,7 +42,7 @@ public class Algo1SatorSquareString {
                 N E T
                 """,
                 """
-                E V E 
+                E V E
                 E E E
                 E E E
                 """,
@@ -62,13 +62,13 @@ public class Algo1SatorSquareString {
                 Ä B U T
                 T U B Ä
                 S T A B
-                        """,
+                """,
                 """
                 P A R T
                 A G A R
                 R A G A
                 T R A M
-                        """,
+                """,
                 """
                 S A T O R
                 A R E P O
