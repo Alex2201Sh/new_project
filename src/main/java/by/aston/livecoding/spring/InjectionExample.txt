@@ -1,0 +1,10 @@
+@Component
+class MyComp {
+    @Autowired
+    private MyDep dep;
+    private Object value;
+
+    public MyComp(){
+        this.value - dep.getValue();
+    }
+}
