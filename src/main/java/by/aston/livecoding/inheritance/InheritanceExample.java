@@ -5,6 +5,7 @@ public class InheritanceExample {
         A obj = new B();
         obj.print();
         obj.nonStaticPrint();
+        System.out.println(-11%10);
     }
 }
 

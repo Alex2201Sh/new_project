@@ -36,7 +36,7 @@ public class ListToMap {
 
     public static Map<String, List<String>> listToMap2(List<Organization> organizations) {
         return organizations.stream()
-                .collect(Collectors.groupingBy(Organization::getNn, Collectors.mapping(organization -> organization.getName(), Collectors.toList())));
+                .collect(Collectors.groupingBy(Organization::getNn, Collectors.mapping(Organization::getName, Collectors.toList())));
     }
 
     public static class Organization {

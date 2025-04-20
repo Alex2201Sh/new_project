@@ -1,6 +1,8 @@
 package by.aston.livecoding.stream;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StreamWorkers {
     public static class Worker {
@@ -40,7 +42,8 @@ public class StreamWorkers {
         );
 
         // сумма которую платим всем
-//        Integer sum =
+        Integer sum = workers.stream()
+                .reduce(0, (sum1, worker) -> sum1 + worker.salary, Integer::sum);
 
         // сгруппировать людей по позициям
 //        Map<String, List<Worker>> workersByPostion =
@@ -50,7 +53,10 @@ public class StreamWorkers {
 //        Map<String, Integer> salarySumByPostition =
 
         // Сколько людей занимают конкретную позицию
-//        Map<String, Integer> countByPosition =
+        Map<String, Integer> countByPosition = workers.stream()
+                .collect(Collectors.groupingBy(Worker::getPosition,
+                        Collectors.collectingAndThen(Collectors.counting(),
+                                Long::intValue)));
 
         // разделить сотрудников на тех кто получает больше 100 и меньше 100
 //        Map<Boolean, List<Worker>> workersBySalaryCondition =
